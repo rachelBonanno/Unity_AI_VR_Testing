@@ -9,7 +9,7 @@ public class FlockUnit : MonoBehaviour {
     private Flock assignedFlock;
     private Vector3 currentVelocity;
     private float speed;
-    public Transform MyTransform { get; set; }
+    public Transform myTransform { get; set; }
 
     public void Awake() {
         myTransform = myTransform;
