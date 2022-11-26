@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlockUnit : MonoBehaviour
-{
+public class FlockUnit : MonoBehaviour {
     [SerializeField] private float FOVAngle;
     [SerializeField] private smoothDamp;
     private List<FlockUnit> cohesionNeighbours = new List<FlockUnit>();
@@ -12,21 +11,19 @@ public class FlockUnit : MonoBehaviour
     private float speed;
     public Transform MyTransform { get; set; }
 
-    public void Awake()
-    {
+    public void Awake() {
         myTransform = myTransform;
     }
-    public void AssignFlock(Flock flock)
-    {
+
+    public void AssignFlock(Flock flock) {
         assignedFlock = flock;
     }
 
-    public void InitializeSpeed(float speed)
-    {
+    public void InitializeSpeed(float speed) {
         this.speed = speed;
     }
-    public void MoveUnit()
-    {
+
+    public void MoveUnit() {
         FindNeighbours();
         var cohesionVector = CalculateCohesionVector();
         var moveVector = Vector3.SmoothDamp(myTransform.forward, cohesionVector, ref currentVelocity, smoothDamp);
@@ -35,44 +32,34 @@ public class FlockUnit : MonoBehaviour
         myTransform.position += moveVector * Time.deltaTime;
     }
 
-    private FindNeighbours()
-    {
+    private FindNeighbours() {
         cohesionNeighbours.Clear();
         var allUnits = assignedFlock.allUnits;
-        for (int i = 0; i < allUnits.Length; i++)
-        {
+        for (int i = 0; i < allUnits.Length; i++) {
             var currentUnit = allUnits[i];
-            if (currentUnit != this)
-            {
-                float currentNeighbourDistanceSqr =
-                    Vector3.SqrMagnitude(currentUnit.transform.position - transform.position);
-                if (currentNeighbourDistanceSqr <= assignedFlock.cohesionDistance * assignedFlock.cohesionDistance)
-                {
+            if (currentUnit != this) {
+                float currentNeighbourDistanceSqr = Vector3.SqrMagnitude(currentUnit.transform.position - transform.position);
+                if (currentNeighbourDistanceSqr <= assignedFlock.cohesionDistance * assignedFlock.cohesionDistance) {
                     cohesionNeighbours.Add(currentUnit);
                 }
             }
         }
     }
 
-    private Vector3 CalculateCohesionVector()
-    {
+    private Vector3 CalculateCohesionVector() {
         var cohesionVector = Vector3.zero;
-        if (cohesionNeighbours.Count == 0)
-        {
+        if (cohesionNeighbours.Count == 0) {
             return cohesionVector;
         }
         int neighboursInFOV = 0;
-        for (int i = 0; i < cohesionNeighbours.Count; i++)
-        {
-            if (IsInFOV(cohesionNeighbours[i].myTransform.position))
-            {
+        for (int i = 0; i < cohesionNeighbours.Count; i++) {
+            if (IsInFOV(cohesionNeighbours[i].myTransform.position)) {
                 neighboursInFOV++;
                 cohesionVector += cohesionNeighbours[i].myTransform.position;
             }
         }
 
-        if (neighboursInFOV == 0)
-        {
+        if (neighboursInFOV == 0) {
             return cohesionVector;
         }
 
@@ -82,8 +69,7 @@ public class FlockUnit : MonoBehaviour
         return cohesionVector;
     }
 
-    private bool IsInFOV(Vector3 position)
-    {
+    private bool IsInFOV(Vector3 position) {
         return Vector3.Angle(myTransform.forward, position - myTransform.position) <= FOVAngle;
     }
 }
