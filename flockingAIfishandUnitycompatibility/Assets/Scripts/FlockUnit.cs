@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FlockUnit : MonoBehaviour {
     [SerializeField] private float FOVAngle;
-    [SerializeField] private smoothDamp;
+    [SerializeField] private float smoothDamp;
     private List<FlockUnit> cohesionNeighbours = new List<FlockUnit>();
     private Flock assignedFlock;
     private Vector3 currentVelocity;
@@ -32,7 +32,7 @@ public class FlockUnit : MonoBehaviour {
         myTransform.position += moveVector * Time.deltaTime;
     }
 
-    private FindNeighbours() {
+    private void FindNeighbours() {
         cohesionNeighbours.Clear();
         var allUnits = assignedFlock.allUnits;
         for (int i = 0; i < allUnits.Length; i++) {
