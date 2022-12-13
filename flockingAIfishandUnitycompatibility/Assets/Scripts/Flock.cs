@@ -12,11 +12,11 @@ public class Flock : MonoBehaviour
 
    [Header("Speed Setup")] 
    [Range(0,10)]
-   [SerializeField] private float minSpeed;
-   public float minSpeed { get { return minSpeed; } }
+   [SerializeField] private float _minSpeed;
+   public float minSpeed { get { return _minSpeed; } }
    [Range(0,10)]
-   [SerializeField] private float maxSpeed;
-   public float maxSpeed { get { return maxSpeed; } }
+   [SerializeField] private float _maxSpeed;
+   public float maxSpeed { get { return _maxSpeed; } }
 
 
 
@@ -84,8 +84,7 @@ public class Flock : MonoBehaviour
       for (int i = 0; i < flocksize; i++)
       {
          var randomVector = UnityEngine.Random.insideUnitSphere;
-         randomVector = new Vector3(randomVector.x * spawnBounds.x, randomVector.y * spawnBounds.y,
-            randomVector.z * spawnBounds.z);
+         randomVector = new Vector3(randomVector.x * spawnBounds.x, randomVector.y * spawnBounds.y, randomVector.z * spawnBounds.z);
          var spawnPosition = transform.position + randomVector;
          var rotation = Quaternion.Euler(0, UnityEngine.Random.Range(0, 360), 0);
          allUnits[i] = Instantiate(flockUnityPrefab, spawnPosition, rotation);
