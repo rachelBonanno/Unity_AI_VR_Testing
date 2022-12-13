@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,18 +13,56 @@ public class Flock : MonoBehaviour
    [Header("Speed Setup")] 
    [Range(0,10)]
    [SerializeField] private float minSpeed;
+   public float minSpeed { get { return minSpeed; } }
    [Range(0,10)]
    [SerializeField] private float maxSpeed;
+   public float maxSpeed { get { return maxSpeed; } }
+
 
 
    [Header("Detection Distances")] 
    [Range(0,10)]
    [SerializeField] private float _cohesionDistance;
-   public float cohesionDistance
-   {
-      get { return _cohesionDistance; }
-   }
-   
+   public float cohesionDistance { get { return _cohesionDistance; } }
+   [Range(0, 10)]
+   [SerializeField] private float _avoidanceDistance;
+   public float avoidanceDistance { get { return _avoidanceDistance; } }
+
+   [Range(0, 10)]
+   [SerializeField] private float _aligementDistance;
+   public float aligementDistance { get { return _aligementDistance; } }
+
+   [Range(0, 10)]
+   [SerializeField] private float _obstacleDistance;
+   public float obstacleDistance { get { return _obstacleDistance; } }
+
+   [Range(0, 100)]
+   [SerializeField] private float _boundsDistance;
+   public float boundsDistance { get { return _boundsDistance; } }
+
+
+   [Header("Behaviour Weights")]
+
+   [Range(0, 10)]
+   [SerializeField] private float _cohesionWeight;
+   public float cohesionWeight { get { return _cohesionWeight; } }
+
+   [Range(0, 10)]
+   [SerializeField] private float _avoidanceWeight;
+   public float avoidanceWeight { get { return _avoidanceWeight; } }
+
+   [Range(0, 10)]
+   [SerializeField] private float _aligementWeight;
+   public float aligementWeight { get { return _aligementWeight; } }
+
+   [Range(0, 10)]
+   [SerializeField] private float _boundsWeight;
+   public float boundsWeight { get { return _boundsWeight; } }
+
+   [Range(0, 100)]
+   [SerializeField] private float _obstacleWeight;
+   public float obstacleWeight { get { return _obstacleWeight; } }
+
    public FlockUnit[] allUnits { get; set; }
 
    private void Start()
