@@ -247,12 +247,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2782d5a9ec598704a969f4673e336495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flockUnityPrefab: {fileID: 4180071797287095269, guid: dc7bfc18f430f15458b0529316f1ce25, type: 3}
+  flockUnityPrefab: {fileID: 3824486048750475700, guid: dc7bfc18f430f15458b0529316f1ce25, type: 3}
   flocksize: 100
   spawnBounds: {x: 10, y: 5, z: 10}
-  minSpeed: 4
-  maxSpeed: 2
+  _minSpeed: 1
+  _maxSpeed: 1
   _cohesionDistance: 5
+  _avoidanceDistance: 0
+  _aligementDistance: 0
+  _obstacleDistance: 0
+  _boundsDistance: 0
+  _cohesionWeight: 0
+  _avoidanceWeight: 0
+  _aligementWeight: 0
+  _boundsWeight: 0
+  _obstacleWeight: 0
 --- !u!4 &912015292
 Transform:
   m_ObjectHideFlags: 0
@@ -282,6 +291,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FOVAngle: 0
   smoothDamp: 0
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 0
+  directionsToCheckWhenAvoidingObstacles: []
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
